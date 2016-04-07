@@ -26,7 +26,7 @@ A policy defines constraints on the nature of the user input. Currently there ar
 * **SAME_AST**: enforces that the static [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) and the dynamic one match, allowing for the user input to contain also non-literals.
 * **SAME_AST_AND_ONLY_LITERALS**: the default policy, enforces that the static [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) and the dynamic one are the same and.
 * **ONLY_JSON**: only object literals with literal properties or arrays with literals are allowed.
-* **NO_FUNCTION_CALLS**: No function calls are allowed in user input.
+* **NO_FUNCTION_CALLS**: no function calls are allowed in user input.
 that the user entered only literals.
 
 Example of how the used policy may be modified:

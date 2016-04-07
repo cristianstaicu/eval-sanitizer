@@ -13,14 +13,14 @@ assert (marker === 1);
 
 /* Basic injection */
 sanitizer.setPolicy(sanitizer.ONLY_LITERALS);
-input = "23; marker = 12";
+input = "23; \n marker = 12";
 marker = 0;
 eval(sanitizer`var x = ${input}`);
 assert(marker === 0, "Sanitization failed");
 
 /* Shim test */
 marker = 0;
-eval(shim("var x = ${input}", { input : input}));
+eval(shim("var useless = 23;\n var x = ${input}", { input : input}));
 assert(marker === 0, "Sanitization failed");
 
 /* Allow property name policy */
@@ -63,9 +63,10 @@ eval(sanitizer`var j1 = ${jsonStr}`);
 assert(JSON.stringify(j1) === JSON.stringify(json));
 
 var marker = 0;
-jsonStr = jsonStr + "; marker = 1;"
+jsonStr = jsonStr + ";\n marker = 1;"
 eval(sanitizer`var j1 = ${jsonStr};`);
 assert(JSON.stringify(j1) === JSON.stringify(json));
+
 assert(marker === 0);
 eval(`var j1 = ${jsonStr};`);
 assert(marker === 1);
@@ -100,3 +101,10 @@ jsonStr = jsonStr.replace("f()", "marker = 1");
 marker = 0;
 eval(sanitizer`var j1 = ${jsonStr};`);
 assert(marker === 1);
+
+/* line / row logic */
+assert(sanitizer.getNumberLines("test") === 1);
+assert(sanitizer.getCharIndex("test") === 4);
+assert(sanitizer.getNumberLines("test\nhow\rmany\n\n\nrows") === 6);
+assert(sanitizer.getCharIndex("test\nhow\rmany\nrowsx") === 5);
+assert(sanitizer.getCharIndex("test\nhow\rmany\n") === 0);
