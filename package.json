@@ -1,7 +1,7 @@
 {
   "name": "eval-sanitizer",
   "description" : "Parsing-based sanitization package for eval.",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "main" : "./lib/sanitizer.js",
   "author": {
     "name": "Cristian-Alexandru Staicu",
@@ -13,6 +13,7 @@
     "ast-traverse" : "0.1.1",
     "es6-template-strings" : "2.0.0"
   },
+  "license" : "BSD-3-Clause",
   "repository" : {
       "type" : "git",
       "url" : "https://github.com/cristianstaicu/eval-sanitizer.git"
